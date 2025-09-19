@@ -96,9 +96,18 @@ export default function LeadManagementApp() {
         setFormData({ name: "", email: "", status: "" })
         setErrors({ name: "", email: "" })
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error)
-      alert(error?.response?.data?.message || "An error occurred while adding the lead.")
+
+    if (axios.isAxiosError(error)) {
+      const apiMessage =
+        (error.response?.data as { message?: string } | undefined)?.message;
+      alert(apiMessage ?? error.message ?? "An error occurred while adding the lead.");
+    } else if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert("An error occurred while adding the lead.");
+    }
     } finally {
       setSubmitting(false)
     }
