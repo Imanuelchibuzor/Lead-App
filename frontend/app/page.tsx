@@ -22,7 +22,7 @@ const statusColors = {
 }
 
 export default function LeadManagementApp() {
-  const server = "http://localhost:4000/leads";
+  const server = "https://lead-app-krtw.onrender.com/leads";
   // const server = "http://localhost:4000/leads"; // Use this for local development
   const [leads, setLeads] = useState<Lead[]>([])
   const [loading, setLoading] = useState(true)
